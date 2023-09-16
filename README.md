@@ -9,5 +9,7 @@ Show a HUD from anywhere in the view hierarchy by calling hudState.show(hudConte
 HUDs can be dismissed by a tap or drag up gesture. Or auto close after hudState.autoClosureDelay seconds.
 
 Author: klaus.h.matzka@gmail.com
+
 Lisence: MIT
-2023 in Vienna/Austria/Europe
+
+Vienna/Austria/Europe, 09-2023
