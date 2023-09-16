@@ -1,5 +1,5 @@
 //
-//  HUDview.swift
+//  HUDView.swift
 //  HUD
 //
 //  Created by Klaus Matzka on 15.09.23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HUDview<Content: View>: View {
+struct HUDView<Content: View>: View {
     
     @EnvironmentObject var hudState: HUDState
     @ViewBuilder let content: Content
@@ -38,7 +38,7 @@ struct HUDView_Preview_Provider: PreviewProvider {
     }
     
     static var previews: some View {
-        HUDview(content: { previewContent })
+        HUDView(content: { previewContent })
     }
 }
 

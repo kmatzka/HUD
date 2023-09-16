@@ -24,7 +24,7 @@ public struct HUDViewModifier: ViewModifier {
         content
             .overlay(alignment: .top) {
                 if hudState.isPresented {
-                    HUDview {
+                    HUDView {
                         AnyView(hudState.view)
                     }
                     .offset(x: 0, y: offset + dragOffset.height)
