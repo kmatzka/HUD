@@ -14,7 +14,6 @@ struct HUDView<Content: View>: View {
     
     var body: some View {
         content
-//            .drawingGroup()
             .frame(minWidth: 100)
             .font(.footnote)
             .padding(.horizontal, 12)
