@@ -21,20 +21,27 @@ public struct HUDViewModifier: ViewModifier {
     }
     
     public func body(content: Content) -> some View {
-        content
-            .overlay(alignment: .top) {
-                if hudState.isPresented {
-                    HUDView {
-                        AnyView(hudState.view)
-                    }
-                    .offset(x: 0, y: offset + dragOffset.height)
-                    .transition(.asymmetric(insertion: .move(edge: .top).combined(with: .opacity),
-                                            removal: .move(edge: .top).combined(with: .opacity)))
-                    .gesture(dragGesture)
-                    .gesture(tapGesture)
+        ZStack {
+            // For the case that the 'content' view is not filling the whole screen,
+            // we add a clear layer (behind content) that fills the whole display area,
+            // so that the top-aligned .overlay always shows the HUD at the top of the screen.
+            Color.clear
+            content
+        }
+        .overlay(alignment: .top) {
+            if hudState.isPresented {
+                HUDView {
+                    AnyView(hudState.view)
                 }
+                .zIndex(1)
+                .offset(x: 0, y: offset + dragOffset.height)
+                .transition(.asymmetric(insertion: .move(edge: .top).combined(with: .opacity),
+                                        removal: .move(edge: .top).combined(with: .opacity)))
+                .gesture(dragGesture)
+                .gesture(tapGesture)
             }
-            .onChange(of: hudState.isPresented) { createHudAutoClosureTask($0) }
+        }
+        .onChange(of: hudState.isPresented) { createHudAutoClosureTask($0) }
     }
     
     // MARK: - Gestures
@@ -42,7 +49,7 @@ public struct HUDViewModifier: ViewModifier {
     private var tapGesture: some Gesture {
         TapGesture()
             .onEnded { _ in
-                withAnimation {
+                withAnimation(.spring(response: 0.2, dampingFraction: 1.0)) {
                     hudState.isPresented = false
                     autoClosureTask?.cancel()
                     autoClosureTask = nil
@@ -62,7 +69,7 @@ public struct HUDViewModifier: ViewModifier {
             .onEnded { value in
                 if value.translation.height < 0 {
                     offset += value.translation.height
-                    withAnimation {
+                    withAnimation(.spring(response: 0.2, dampingFraction: 1.0)) {
                         offset += value.predictedEndLocation.y - value.translation.height
                         hudState.isPresented = false
                         offset = 0
