@@ -12,7 +12,7 @@ An simple HUD overlay view accessible from any SwiftUI view.
 HUDs can be dismissed by a **tap** or **swipe-up** gesture. Or auto close after **hudState.autoClosureDelay** seconds.
 
 
-![](showHUD.gif)
+![](ShowHUD.gif)
 
 
 Author: klaus.h.matzka@gmail.com
