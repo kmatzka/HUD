@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+/// The ViewModifier that HUDifies a view hierarchy.
+/// 
+/// Apply at the top level of your view tree, typically at the app's WindowGroup() view:
+///
+/// `.modifier(HUDViewModifier())`
 public struct HUDViewModifier: ViewModifier {
     
     @EnvironmentObject private var hudState: HUDState
@@ -31,7 +36,7 @@ public struct HUDViewModifier: ViewModifier {
         .overlay(alignment: .top) {
             if hudState.isPresented {
                 HUDView {
-                    AnyView(hudState.view)
+                    AnyView(hudState.content)
                 }
                 .zIndex(1)
                 .offset(x: 0, y: offset + dragOffset.height)
