@@ -17,6 +17,6 @@ HUDs can be dismissed by a **tap** or **swipe-up** gesture. Or auto close after 
 
 Author: klaus.h.matzka@gmail.com
 
-Lisence: MIT
+License: MIT
 
-Vienna/Austria/Europe, 09-2023
+Vienna/Austria/Europe, September 2023
